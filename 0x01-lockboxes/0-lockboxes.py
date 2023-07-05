@@ -1,4 +1,6 @@
+# method that determines if all the boxes can be opened.
 def canUnlockAll(boxes):
+
     n = len(boxes)
     visited = [False] * n  # Keep track of visited boxes
     visited[0] = True  # First box is unlocked
