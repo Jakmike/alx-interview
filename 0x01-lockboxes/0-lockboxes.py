@@ -1,4 +1,4 @@
-def canUnlockAll(boxes):
+def can_Unlock_All(boxes):
     n = len(boxes)
 
     # Keep track of visited boxes
