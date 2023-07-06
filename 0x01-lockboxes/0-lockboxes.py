@@ -1,25 +1,15 @@
-#!/usr/bin/env python3
-
-
 def canUnlockAll(boxes):
     n = len(boxes)
+    visited = [False] * n  # Keep track of visited boxes
+    visited[0] = True  # First box is unlocked
 
-    # Keep track of visited boxes
-    visited = [False] * n
-
-    # First box is unlocked
-    visited[0] = True
-
-    # Start BFS with the first box
-    queue = [0]
-
-    while queue:
-        current_box = queue.pop(0)
-        keys = boxes[current_box]
-
+    def dfs(box):
+        visited[box] = True
+        keys = boxes[box]
         for key in keys:
             if not visited[key]:
-                visited[key] = True
-                queue.append(key)
+                dfs(key)
+
+    dfs(0)  # Start DFS with the first box
 
     return all(visited)
