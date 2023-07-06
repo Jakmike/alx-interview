@@ -1,4 +1,7 @@
-def can_Unlock_All(boxes):
+#!/usr/bin/env python3
+
+
+def canUnlockAll(boxes):
     n = len(boxes)
 
     # Keep track of visited boxes
