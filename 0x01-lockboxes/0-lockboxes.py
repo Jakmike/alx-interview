@@ -1,39 +1,28 @@
 #!/usr/bin/python3
 
 """
-Lockboxes module.
+Script that determines if all the boxes can be opened
 """
 
 
 def canUnlockAll(boxes):
-    """
-    Determines if all the boxes can be unlocked.
+    num_boxes = len(boxes)
+    unlocked_boxes = [False] * num_boxes
+    unlocked_boxes[0] = True
 
-    Args:
-        boxes (list): A list of lists representing the boxes and their keys.
+    """Use a stack to keep track of the boxes to be explored"""
+    stack = [0]
 
-    Returns:
-        bool: True if all boxes can be unlocked, False otherwise.
-    """
+    """Depth-first search to unlock boxes"""
+    while stack:
+        current_box = stack.pop()
 
-    n = len(boxes)
-    visited = [False] * n  # Keep track of visited boxes
-    visited[0] = True  # First box is unlocked
+        """Check all the keys in the current box"""
+        for key in boxes[current_box]:
+            if key < num_boxes and not unlocked_boxes[key]:
+                """Unlock the box if it hasn't been unlocked before"""
+                unlocked_boxes[key] = True
+                stack.append(key)
 
-    def dfs(box):
-        """
-        Perform depth-first search (DFS) to explore the boxes and their keys.
-
-        Args:
-            box (int): The box number to start the DFS from.
-        """
-
-        visited[box] = True
-        keys = boxes[box]
-        for key in keys:
-            if not visited[key]:
-                dfs(key)
-
-    dfs(0)  # Start DFS with the first box
-
-    return all(visited)
+    """Check if all boxes have been unlocked"""
+    return all(unlocked_boxes)
